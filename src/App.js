@@ -9,6 +9,9 @@ import Categories from './pages/Categories';
 import Services from './pages/Services';
 import Orders from './pages/Orders';
 import Settings from './pages/Settings';
+import VideoChannels from './pages/VideoChannels';
+import AdultVideos from './pages/AdultVideos';
+import Subscriptions from './pages/Subscriptions';
 import './App.css';
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/services" element={<Services />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/videos" element={<VideoChannels />} />
+            <Route path="/adult-videos" element={<AdultVideos />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>

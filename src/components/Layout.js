@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { HiOutlineHome, HiOutlineTag, HiOutlineCube, HiOutlineLogout, HiOutlineClipboardList, HiOutlineCog } from 'react-icons/hi';
+import { HiOutlineHome, HiOutlineTag, HiOutlineCube, HiOutlineLogout, HiOutlineClipboardList, HiOutlineCog, HiOutlinePlay, HiOutlineFilm, HiOutlineCreditCard } from 'react-icons/hi';
 
 export default function Layout() {
   const { user, logout } = useAuth();
@@ -34,6 +34,15 @@ export default function Layout() {
           </NavLink>
           <NavLink to="/orders" className={linkClass}>
             <HiOutlineClipboardList size={20} /> Orders
+          </NavLink>
+          <NavLink to="/videos" className={linkClass}>
+            <HiOutlinePlay size={20} /> Video Channels
+          </NavLink>
+          <NavLink to="/adult-videos" className={linkClass}>
+            <HiOutlineFilm size={20} /> Adult Videos (18+)
+          </NavLink>
+          <NavLink to="/subscriptions" className={linkClass}>
+            <HiOutlineCreditCard size={20} /> Subscriptions
           </NavLink>
           <NavLink to="/settings" className={linkClass}>
             <HiOutlineCog size={20} /> Settings
