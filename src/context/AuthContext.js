@@ -9,10 +9,23 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    const stored = localStorage.getItem('admin_user');
-    if (token && stored) {
-      setUser(JSON.parse(stored));
+    try {
+      const token = localStorage.getItem('admin_token');
+      const stored = localStorage.getItem('admin_user');
+      if (token && stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.role === 'admin') {
+          setUser(parsed);
+        } else {
+          // Invalid or non-admin user data — clear it
+          localStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_user');
+        }
+      }
+    } catch {
+      // Corrupted localStorage data — clear it
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_user');
     }
     setLoading(false);
   }, []);

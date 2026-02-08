@@ -16,14 +16,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 responses
+// Handle 401 responses — only redirect if not already on login page
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('admin_token');
-      localStorage.removeItem('admin_user');
-      window.location.href = '/login';
+      // Don't redirect if the failed request was the login endpoint itself
+      const requestUrl = error.config?.url || '';
+      if (!requestUrl.includes('/auth/login')) {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+        // Use replace to avoid back-button loops
+        if (window.location.pathname !== '/login') {
+          window.location.replace('/login');
+        }
+      }
     }
     return Promise.reject(error);
   }
